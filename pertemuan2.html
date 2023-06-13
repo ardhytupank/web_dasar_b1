@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertemuan 2</title>
+</head>
+<body>
+    <h3>Form Input Produk</h3>
+    <table>
+        <tr>
+            <td>Kode Produk</td>
+            <td>:</td>
+            <td>
+                <input type="text" placeholder="Input kode produk">
+            </td>
+        </tr>
+        <tr>
+            <td>Jenis Produk</td>
+            <td>:</td>
+            <td>
+                <select name="" id="">
+                    <option value="">Pilih Jenis Produk</option>
+                    <option>Kosmetik</option>
+                    <option>Jajanan</option>
+                    <option>Minuman</option>
+                    <option>Elektronik</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Nama Produk</td>
+            <td>:</td>
+            <td>
+                <input type="text" placeholder="Input nama produk">
+            </td>
+        </tr>
+        <tr>
+            <td>Harga Produk</td>
+            <td>:</td>
+            <td>
+                <input type="number" placeholder="Input harga produk">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <button style="width: 100%;">Simpan</button>
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <h1>Tabel Produk</h1>
+    <table border="1" style="border-collapse: collapse; text-align: center; width: 50%;">
+      <tr style="background-color: yellow;">
+        <th>No</th>
+        <th>Kode Produk</th>
+        <th>Jenis Produk</th>
+        <th>Nama Produk</th>
+        <th>Harga Produk</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>PRD001</td>
+        <td>Kosmetik</td>
+        <td>Wardah</td>
+        <td>Rp 10.000</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>PRD002</td>
+        <td>Kosmetik</td>
+        <td>Wirdih</td>
+        <td>Rp 15.000</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>PRD003</td>
+        <td>Kosmetik</td>
+        <td>Garnier</td>
+        <td>Rp 18.000</td>
+      </tr>
+    </table>
+    <hr>
+    <!-- Belajar colspan dan rowspan -->
+    <table border="1" style="width: 100%; font-size: 30px; border-collapse: collapse;">
+        <tr>
+            <th rowspan="3">A</th>
+            <th>B</th>
+            <th colspan="2">C</th>
+        </tr>
+        <tr>
+            <th rowspan="2">D</th>
+            <th>E</th>
+            <th>F</th>
+        </tr>
+        <tr>
+            <th colspan="2">G</th>
+        </tr>
+    </table>
+
+</body>
+</html>
