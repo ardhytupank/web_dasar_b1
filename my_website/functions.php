@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set("Asia/Jakarta");
+
 function koneksi()
 {
   $server = "localhost";
@@ -10,5 +12,13 @@ function koneksi()
     $username,
     $password,
     $database
+  );
+}
+
+function spesialis()
+{
+  return mysqli_query(
+    koneksi(),
+    "SELECT * FROM spesialis"
   );
 }
