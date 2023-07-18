@@ -1,3 +1,5 @@
+<?php require "functions.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,6 +22,43 @@
   </ul>
   <hr>
   <a href="tambah_dokter.php">Tambah Data Dokter</a>
+
+  <table border="1" style="width: 100%; border-collapse: collapse;">
+    <tr>
+      <th>No</th>
+      <th>ID Dokter</th>
+      <th>Nama Dokter</th>
+      <th>Spesialis</th>
+      <th>Created</th>
+      <th>Updated</th>
+      <th>Opsi</th>
+    </tr>
+    <?php
+    $no = 1;
+    foreach (dokter() as $d) : ?>
+      <tr>
+        <td><?= $no++; ?></td>
+        <td><?= $d["id"]; ?></td>
+        <td><?= $d["nama_dokter"]; ?></td>
+        <td><?= spesialis_satu($d["id_spesialis"], "nama"); ?></td>
+        <td><?= $d["simpan"]; ?></td>
+        <td><?= $d["edit"]; ?></td>
+        <td>
+          <a href="edit_dokter.php?id=<?= $d["id"] ?>">Edit</a>
+          <a href="javascript:hapus('hapus.php?id=<?= $d["id"] ?>')">Hapus</a>
+        </td>
+      </tr>
+    <?php endforeach; ?>
+  </table>
+
+  <script>
+    function hapus(url) {
+      if (confirm("Apakah data berikut akan dihapus?")) {
+        document.location = url;
+      }
+    }
+  </script>
+
 </body>
 
 </html>
