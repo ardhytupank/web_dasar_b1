@@ -89,9 +89,9 @@ $id_dokter = $_GET["id"];
         echo "<script>
       alert('Format Gambar tidak sesuai');
       </script>";
-      } elseif ($type_gambar != "image/jpg" and $type_gambar != "image/png" and $type_gambar != "image.jpeg") {
+      } elseif ($type_gambar != "image/png" and $type_gambar != "image/jpeg" and $type_gambar != "image/jpg") {
         echo "<script>
-      alert('Format Gambar tidak sesuai');
+      alert('Format Gambar tidak sesuai loh');
       </script>";
       } elseif ($ukuran_gambar > 1000000) {
         echo "<script>
@@ -114,20 +114,51 @@ $id_dokter = $_GET["id"];
         );
 
         if ($simpan_edit_dokter) {
-          $simpan_gambar_dokter = mysqli_query(
-            koneksi(),
-            "INSERT INTO dokter_gambar VALUES('$id_dokter','$nama_gambar_baru')"
-          );
-          if ($simpan_gambar_dokter) {
-            move_uploaded_file($tmp_name_gambar, $tmp . $nama_gambar_baru);
-            echo "<script>
-            alert('Edit Dokter berhasil!');
-            location='dokter.php'
-            </script>";
+          //ini digunakan untuk mengechek apakah gambar di tabel dokter_gambar ada atau tidak
+          if (dokter_gambar_jumlah($id_dokter) > 0) {
+            //jika gambar dokter sudah ada sebelumnya
+            $nama_gambar_lama = dokter_gambar($id_dokter, "gambar");
+            $edit_gambar_dokter = mysqli_query(
+              koneksi(),
+              "UPDATE dokter_gambar SET
+              gambar = '$nama_gambar_baru',
+              updated = '$tanggal_hari_ini'
+              WHERE
+              id_dokter = '$id_dokter'"
+            );
+            if ($edit_gambar_dokter) {
+              //ini digunakan untuk menghapus gambar dari folder img
+              unlink($tmp . $nama_gambar_lama);
+              //ini untuk menyimpan gambar yang telah di upload
+              move_uploaded_file($tmp_name_gambar, $tmp . $nama_gambar_baru);
+              echo "<script>
+              alert('Edit Dokter berhasil!');
+              location='dokter.php'
+              </script>";
+            } else {
+              echo "<script>
+              alert('Edit Gambar Dokter Gagal!');
+              location='dokter.php'
+              </script>";
+            }
           } else {
-            echo "<script>
-            alert('Simpan gambar dokter gagal!');
-            </script>";
+            //ini jika gambar belum ada sebelumnya
+            $simpan_gambar_dokter = mysqli_query(
+              koneksi(),
+              "INSERT INTO dokter_gambar VALUES('$id_dokter','$nama_gambar_baru','$tanggal_hari_ini','$tanggal_hari_ini')"
+            );
+            if ($simpan_gambar_dokter) {
+              //ini untuk menyimpan gambar yang telah di upload
+              move_uploaded_file($tmp_name_gambar, $tmp . $nama_gambar_baru);
+              echo "<script>
+              alert('Edit Dokter berhasil!');
+              location='dokter.php'
+              </script>";
+            } else {
+              echo "<script>
+              alert('Simpan gambar dokter gagal!');
+              </script>";
+            }
           }
         } else {
           echo "<script>

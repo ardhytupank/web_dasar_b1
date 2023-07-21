@@ -41,7 +41,7 @@
         <td><?= $d["id"]; ?></td>
         <td><?= $d["nama_dokter"]; ?></td>
         <td><?= spesialis_satu($d["id_spesialis"], "nama"); ?></td>
-        <td><img src="img/<?= dokter_gambar($d["id"]); ?>" alt="" style="width: 100px;"></td>
+        <td><img src="img/<?= dokter_gambar($d["id"], "gambar"); ?>" alt="" style="width: 100px;"></td>
         <td><?= $d["simpan"]; ?></td>
         <td><?= $d["edit"]; ?></td>
         <td>

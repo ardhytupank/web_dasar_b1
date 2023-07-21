@@ -51,7 +51,7 @@ function dokter_hapus($id_dokter)
   );
 }
 
-function dokter_gambar($id_dokter)
+function dokter_gambar($id_dokter, $isi_tabel)
 {
   $x = mysqli_fetch_assoc(
     mysqli_query(
@@ -59,7 +59,17 @@ function dokter_gambar($id_dokter)
       "SELECT * FROM dokter_gambar WHERE id_dokter = '$id_dokter'"
     )
   );
-  return @$x["gambar"];
+  return @$x[$isi_tabel];
+}
+
+function dokter_gambar_jumlah($id_dokter)
+{
+  return mysqli_num_rows(
+    mysqli_query(
+      koneksi(),
+      "SELECT * FROM dokter_gambar WHERE id_dokter = '$id_dokter'"
+    )
+  );
 }
 
 function spesialis_satu($id_spesialis, $isi_tabel)

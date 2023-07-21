@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 21, 2023 at 12:16 PM
+-- Generation Time: Jul 21, 2023 at 04:12 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -40,9 +40,9 @@ CREATE TABLE `dokter` (
 --
 
 INSERT INTO `dokter` (`id`, `nama_dokter`, `id_spesialis`, `simpan`, `edit`) VALUES
-(3, 'Juanda', 4, '2023-07-18 09:34:39', '2023-07-18 09:34:39'),
-(4, 'Jaka', 2, '2023-07-18 10:22:58', '2023-07-18 10:22:58'),
-(6, 'vbn', 3, '2023-07-21 15:55:20', '2023-07-21 17:11:10');
+(3, 'Juanda', 4, '2023-07-18 09:34:39', '2023-07-21 21:08:57'),
+(4, 'Jaka', 2, '2023-07-18 10:22:58', '2023-07-21 21:06:33'),
+(6, 'vbn', 3, '2023-07-21 15:55:20', '2023-07-21 20:57:08');
 
 -- --------------------------------------------------------
 
@@ -52,15 +52,17 @@ INSERT INTO `dokter` (`id`, `nama_dokter`, `id_spesialis`, `simpan`, `edit`) VAL
 
 CREATE TABLE `dokter_gambar` (
   `id_dokter` int(11) NOT NULL,
-  `gambar` varchar(255) NOT NULL
+  `gambar` varchar(255) NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `dokter_gambar`
 --
 
-INSERT INTO `dokter_gambar` (`id_dokter`, `gambar`) VALUES
-(6, '64ba59be35063.png');
+INSERT INTO `dokter_gambar` (`id_dokter`, `gambar`, `created`, `updated`) VALUES
+(3, '64ba9179c1f3b.png', '2023-07-21 21:08:13', '2023-07-21 21:08:57');
 
 -- --------------------------------------------------------
 
@@ -94,6 +96,13 @@ ALTER TABLE `dokter`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `dokter_gambar`
+--
+ALTER TABLE `dokter_gambar`
+  ADD UNIQUE KEY `gambar` (`gambar`),
+  ADD KEY `id_dokter` (`id_dokter`);
+
+--
 -- Indexes for table `spesialis`
 --
 ALTER TABLE `spesialis`
@@ -115,6 +124,16 @@ ALTER TABLE `dokter`
 --
 ALTER TABLE `spesialis`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `dokter_gambar`
+--
+ALTER TABLE `dokter_gambar`
+  ADD CONSTRAINT `dokter_gambar_ibfk_1` FOREIGN KEY (`id_dokter`) REFERENCES `dokter` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
